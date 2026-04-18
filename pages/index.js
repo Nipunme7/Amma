@@ -1,7 +1,11 @@
 import { Box, Text, Image, Flex, Collapse, Button } from "@chakra-ui/react";
 import { useRef, useState } from "react";
+import getConfig from "next/config";
 
 export default function Home() {
+  const { publicRuntimeConfig } = getConfig();
+  const basePath = publicRuntimeConfig?.basePath ?? "";
+
   const [show, setShow] = useState(false);
   const [hasStartedMusic, setHasStartedMusic] = useState(false);
   const audioRef = useRef(null);
@@ -81,8 +85,8 @@ export default function Home() {
               Click here
             </Button>
             <audio ref={audioRef} loop>
-              <source src="/Amma.m4a" type="audio/mp4" />
-              <source src="/bg-music.mp3" type="audio/mpeg" />
+              <source src={`${basePath}/Amma.m4a`} type="audio/mp4" />
+              <source src={`${basePath}/bg-music.mp3`} type="audio/mpeg" />
             </audio>
           </Flex>
           <Image
@@ -90,7 +94,7 @@ export default function Home() {
             maxW="100%"
             h="auto"
             objectFit="contain"
-            src="/mother.png"
+            src={`${basePath}/mother.png`}
             marginLeft={{ base: 0, md: "40px", lg: "100px" }}
             padding="10px"
             flexShrink={0}

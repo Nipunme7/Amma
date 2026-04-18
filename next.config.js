@@ -1,7 +1,11 @@
 const isProd = process.env.NODE_ENV === "production";
+const basePath = isProd ? "/Amma" : "";
 
 module.exports = {
   trailingSlash: true,
-  basePath: isProd ? "/Amma" : "",
-  assetPrefix: isProd ? "/Amma/" : "",
+  basePath,
+  assetPrefix: basePath ? `${basePath}/` : "",
+  publicRuntimeConfig: {
+    basePath,
+  },
 };
